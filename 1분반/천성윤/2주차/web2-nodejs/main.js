@@ -11,7 +11,8 @@ var app = http.createServer(function(request, response) {
         return response.writeHead(404); // favicon.ico 요청시 404 응답
     }
     response.writeHead(200); // 응답 헤더에 200 상태 코드 설정
-    response.end(fs.readFileSync(__dirname + url)); // 파일을 읽어 응답으로 전송
+    console.log(__dirname + url); //웹 브라우저가 요청한 파일의 경로를 콘솔로 출력
+    response.end(fs.readFileSync(__dirname + url)); // 파일을 읽어 응답으로 전송, 웹 브라우저의 요청에 응답하는 명령
 });
 
 // 서버를 3000번 포트에서 실행
