@@ -71,7 +71,7 @@ var app = http.createServer(function(request, response) {
             var title = post.title;
             var description = post.description;
             fs.writeFile(`data/${title}`, description, 'utf8', function(err) {
-                response.writeHead(302, {Location: `/?id=${title}`});
+                response.writeHead(302, {Location: `/`});
                 response.end();
             });
         });
@@ -112,7 +112,7 @@ var app = http.createServer(function(request, response) {
             var description = post.description;
             fs.rename(`data/${id}`, `data/${title}`, function(error) {
                 fs.writeFile(`data/${title}`, description, 'utf8', function(err) {
-                    response.writeHead(302, {Location: `/?id=${title}`});
+                    response.writeHead(302, {Location: `/`});
                     response.end();
                 });
             });
