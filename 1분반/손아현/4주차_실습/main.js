@@ -1,163 +1,42 @@
 var http = require('http');
-var fs = require('fs');
 var url = require('url');
 var qs = require('querystring');
 var template = require('./lib/template.js');
-var path = require('path');
-var sanitizeHtml = require('sanitize-html');
-var mysql = require('mysql');   // mysql 모듈 불러오기
+var db = require('./lib/db.js');   // ./lib/db.js 모듈을 불러오기
+var topic = require('./lib/topic.js'); // ./lib/topic.js (글 목록 불러는 모듈) 불러오기
+var author = require('./lib/author.js'); //./lib/author.js (작성자 목록 불러는 모듈) 불러오기   
 
-// DB 커넥션 생성
-var db = mysql.createConnection({
-    host:'localhost',
-    user:'root',
-    password:'0731',
-    database:'opentutorials'
-});
-db.connect();   // DB 연결
-
+// 라우팅: 경로에 따라 분기하여 처리하는 것
 var app = http.createServer(function(request, response) {
     var _url = request.url;
     var queryData = url.parse(_url, true).query;
     var pathname = url.parse(_url, true).pathname;
     if(pathname === '/') {
         if(queryData.id === undefined) {
-            // DB에 질의문 작성
-            db.query(`SELECT * FROM topic`, function(error, topics) {
-                var title = 'Welcome';
-                var description = 'Hello, Node.js';
-                var list = template.list(topics);   // topics 자체를 전달
-                var html = template.HTML(title, list,
-                    `<h2>${title}</h2>${description}`,
-                    `<a href="/create">create</a>`
-                );
-                response.writeHead(200);
-                response.end(html);
-            });
+            topic.home(request, response);
         } else {
-            db.query(`SELECT * FROM topic`, function(error, topics) {
-                if(error) {
-                    throw error;
-                }
-                db.query(`SELECT * FROM topic WHERE id=?`, [queryData.id], function(error2, topic) {
-                    if(error2) {
-                        throw error2;
-                    }
-                    var title = topic[0].title; // 타이틀을 topic 테이블의 title 컬럼으로
-                    var description = topic[0].description; // 설명을 topic 테이블의 description 컬럼으로
-                    var list = template.list(topics);
-                    var html = template.HTML(title, list,
-                        `<h2>${title}</h2>${description}`,
-                        ` <a href="/create">create</a>
-                            <a href="/update?id=${queryData.id}">update</a>
-                            <form action="delete_process" method="post">
-                                <input type="hidden" name="id" value="${queryData.id}">
-                                <input type="submit" value="delete">
-                            </form>`
-                    );
-                    response.writeHead(200);
-                    response.end(html);
-                });
-            });
+            topic.page(request, response);
         }
     } else if(pathname === '/create') {
-        db.query(`SELECT * FROM topic`, function(error, topics) {
-            var title = 'Create';
-            var list = template.list(topics);
-            var html = template.HTML(title, list,
-                `
-                <form action="/create_process" method="post">
-                    <p><input type="text" name="title" placeholder="title"></p>
-                    <p>
-                        <textarea name="description" placeholder="description"></textarea>
-                    </p>
-                    <p>
-                        <input type="submit">
-                    </p>
-                </form>
-                `,
-                `<a href="/create">create</a>`
-            );
-            response.writeHead(200);
-            response.end(html);
-        });
+        topic.create(request, response);
     } else if(pathname === '/create_process') {
-        var body = '';
-        request.on('data', function(data) {
-            body = body + data;
-        });
-        request.on('end', function() {
-            var post = qs.parse(body);
-            db.query(`
-                INSERT INTO topic (title, description, created, author_id)
-                    VALUES(?, ?, NOW(), ?)`,
-                [post.title, post.description, 1], function(error, result) {
-                    if(error) {
-                        throw error;
-                    }
-                    response.writeHead(302, {Location: `/?id=${result.insertId}`}); // 새로 추가한 데이터의 id값을 DB에서 가져오기
-                    response.end();
-                }
-            );
-        });
+        topic.create_process(request, response);
     } else if(pathname === '/update') {
-        db.query('SELECT * FROM topic', function(error, topics) {
-            if(error) {
-                throw error;
-            }
-            db.query(`SELECT * FROM topic WHERE id=?`,[queryData.id], function(error2, topic) {
-                if(error2) {
-                    throw error2;
-                }
-
-                var list = template.list(topics);
-                var html = template.HTML(topic[0].title, list,
-                    `
-                    <form action="/update_process" method="post">
-                        <input type="hidden" name="id" value="${topic[0].id}">
-                        <p><input type="text" name="title" placeholder="title" value="${topic[0].title}"></p>
-                        <p>
-                            <textarea name="description" placeholder="description">${topic[0].description}</textarea>
-                        </p>
-                        <p>
-                            <input type="submit">
-                        </p>
-                    </form>
-                    `,
-                    `<a href="/create">create</a> <a href="/update?id=${topic[0].id}">update</a>`
-                );
-                response.writeHead(200);
-                response.end(html);
-            });
-        });
+        topic.update(request, response);
     } else if(pathname === '/update_process') {
-        var body = '';
-        request.on('data', function(data) {
-            body = body + data;
-        });
-        request.on('end', function() {
-            var post = qs.parse(body);
-            db.query('UPDATE topic SET title=?, description=?, author_id=1 WHERE id=?',
-                [post.title, post.description, post.id], function(error, result) {
-                response.writeHead(302, {Location: `/?id=${post.id}`});
-                response.end();
-            });
-        });
+        topic.update_process(request, response);
     } else if(pathname === '/delete_process') {
-        var body = '';
-        request.on('data', function(data) {
-            body = body + data;
-        });
-        request.on('end', function() {
-            var post = qs.parse(body);
-            db.query('DELETE FROM topic WHERE id = ?', [post.id], function(error, result) {
-                if(error) {
-                    throw error;
-                }
-                response.writeHead(302, {Location: `/`});
-                response.end();
-            });
-        });
+        topic.delete_process(request, response);
+    } else if(pathname === '/author'){
+        author.home(request, response);
+    } else if(pathname === '/author/create_process') {
+        author.create_process(request, response);
+    } else if(pathname === '/author/update') {
+        author.update(request, response);
+    } else if(pathname === '/author/update_process') {
+        author.update_process(request, response);
+    } else if(pathname === '/author/delete_process') {
+        author.delete_process(request, response);
     } else {
         response.writeHead(404);
         response.end('Not found');
