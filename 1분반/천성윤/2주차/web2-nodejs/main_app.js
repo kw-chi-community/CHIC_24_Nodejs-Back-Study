@@ -3,17 +3,17 @@ var fs = require('fs');
 var url = require('url');
 
 var app = http.createServer(function (request, response) {
-    var _url = request.url;
-    var queryData = url.parse(_url, true).query;
-    var title = queryData.id;
-    if (_url == '/') {
-        title = 'Welcome';
-    }
-    if (_url == '/favicon.ico') {
-        return response.writeHead(404);
-    }
-    response.writeHead(200);
-    var template = `
+  var _url = request.url;
+  var queryData = url.parse(_url, true).query;
+  var title = queryData.id;
+  if (_url == '/') {
+    title = 'Welcome';
+  }
+  if (_url == '/favicon.ico') {
+    return response.writeHead(404);
+  }
+  response.writeHead(200);
+  var template = `
     <!doctype html>
     <html>
     <head>
@@ -35,7 +35,7 @@ var app = http.createServer(function (request, response) {
     </body>
     </html>
     `;
-    response.end(template);
+  response.end(template);
 
 });
 app.listen(3000);
