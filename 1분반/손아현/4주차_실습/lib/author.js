@@ -49,6 +49,7 @@ exports.create_process = function(request, response) {
     });
     request.on('end', function() {
         var post = qs.parse(body);
+        // author 테이블의 name, profile 애트리뷰트에 VALUES 이하의 값을 삽입
         db.query(`
             INSERT INTO author (name, profile)
                 VALUES(?, ?)`,
@@ -135,7 +136,7 @@ exports.delete_process = function(request, response) {
     });
     request.on('end', function() {
         var post = qs.parse(body);
-        // topic 테이블에서 id로 해당 튜플 삭제
+        // topic 테이블에서 id로 해당 튜플 삭제 (글을 먼저 삭제)
         db.query(
             `DELETE FROM topic WHERE author_id=?`,
             [post.id],
@@ -143,7 +144,7 @@ exports.delete_process = function(request, response) {
                 if(error1) {
                     throw error1;
                 }
-                // author 테이블에서 id로 해당 튜플 삭제
+                // author 테이블에서 id로 해당 튜플 삭제 (사용자를삭제)
                 db.query(`
                     DELETE FROM author WHERE id=?`,
                     [post.id],

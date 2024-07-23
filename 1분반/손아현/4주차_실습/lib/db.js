@@ -5,7 +5,7 @@ var db = mysql.createConnection({
     host:'localhost',
     user:'root',
     password:'0731',
-    database:'opentutorials'
+    database:'opentutorials'    // 사용할 데이터베이스의 이름
 });
 db.connect();   // DB 연결
 

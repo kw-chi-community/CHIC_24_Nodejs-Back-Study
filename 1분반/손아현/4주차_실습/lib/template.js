@@ -22,6 +22,7 @@ module.exports = {
         var list = '<ul>';
         var i = 0;
         while(i < topics.length) {
+            // 모든 튜플의 id 속성을 뽑아 쿼리데이터로, 모든 튜플의 title 속성을 뽑아 링크로
             list = list + `<li><a href="/?id=${topics[i].id}">${sanitizeHtml(topics[i].title)}</a></li>`;
             i = i + 1;
         }
@@ -33,7 +34,7 @@ module.exports = {
         // author_id의 개수만큼 콤보박스의 옵션 생성하기
         while(i < authors.length) {
             var selected = '';
-            // author_id와 authors[i].id가 같으면 selected="selected" 추가
+            // author_id와 authors[i].id가 같으면 selected="selected" (디폴트로 선택되어 있도록)
             if (authors[i].id === author_id){
                 selected ='selected';
             }
