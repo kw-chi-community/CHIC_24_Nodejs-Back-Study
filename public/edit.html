@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>글 수정</title>
+  <link rel="stylesheet" href="edit.css" />
+</head>
+<body>
+  <!-- 상단 로고 부분 -->
+  <div class="top"><h1>CHIC-FLIX</h1></div>
+
+  <!-- 글 수정 폼 -->
+  <div id="edit-container" class="main-content">
+    <form id="edit-form" enctype="multipart/form-data">
+      <label for="title">제목:</label>
+      <input type="text" id="title" name="title" required />
+      
+      <label for="image">이미지:</label>
+      <input type="file" id="image" name="image" accept="image/*">
+      <img id="image-preview" class="image-preview" src="" alt="Image Preview" style="display: none;">
+      
+      <label for="content">본문 내용:</label>
+      <textarea id="content" name="content" rows="4" required></textarea>
+      
+      <button type="submit">저장</button>
+    </form>
+  </div>
+
+  <!-- 뒤로 가기 버튼 -->
+  <button id="back-btn">뒤로 가기</button>
+
+  <!-- edit.js 파일 연결 -->
+  <script src="edit.js"></script>
+</body>
+</html>
