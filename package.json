@@ -1,0 +1,12 @@
+{
+  "name": "movie-journal",
+  "version": "1.0.0",
+  "description": "Movie Journal Project",
+  "main": "server/app.js",
+  "scripts": {
+    "start": "node server/app.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

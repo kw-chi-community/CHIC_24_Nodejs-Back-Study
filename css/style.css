@@ -1,0 +1,53 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+.photo-upload, .rating, .review {
+    margin-bottom: 20px;
+}
+
+.star {
+    font-size: 2rem;
+    cursor: pointer;
+    color: lightgray;
+    transition: color 0.3s;
+}
+
+.star.selected {
+    color: gold; /* 선택된 별의 색상 */
+}
+
+.rating {
+    display: flex;
+    gap: 5px;
+    margin: 10px 0;
+}
+
+#save {
+    background: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#save:hover {
+    background: #0056b3;
+}
