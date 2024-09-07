@@ -1,0 +1,70 @@
+/* 전역 스타일 */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9; /* 부드러운 배경색 */
+  margin: 0;
+  padding: 0;
+}
+
+/* 상단 로고 */
+.top {
+  text-align: center;
+  padding: 20px;
+  background-color: #333; /* 상단 바 배경색 */
+  color: #fff; /* 상단 바 글자색 */
+}
+
+.top h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+/* 게시글 컨테이너 */
+#post-container {
+  max-width: 800px;
+  margin: 20px auto; /* 중앙 정렬 */
+  padding: 20px;
+  background-color: #fff; /* 게시글 배경색 */
+  border-radius: 8px; /* 모서리 둥글기 */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+}
+
+/* 이미지 스타일 */
+.post-image-container {
+  text-align: center; /* 이미지 가운데 정렬 */
+  margin: 20px 0; /* 위아래 여백 추가 */
+}
+
+.post-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px; /* 모서리 둥글기 */
+  display: inline-block; /* 이미지 중앙 정렬을 위해 inline-block 사용 */
+}
+
+/* 하단 네비게이션 바 */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #333;
+  padding: 10px;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* 상단 그림자 */
+}
+
+/* 네비게이션 아이템 */
+.nav-item {
+  color: #fff;
+  margin: 0 15px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+}
+
+.nav-item:hover {
+  text-decoration: underline;
+  font-weight: bold; /* 호버 시 강조 효과 */
+}
