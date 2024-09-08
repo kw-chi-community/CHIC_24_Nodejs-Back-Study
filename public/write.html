@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie Journal</title>
+    <link rel="stylesheet" href="write.css" />
+  </head>
+  <body>
+
+    <div class="container">
+      <div class="top"><h1>CHIC-FLIX</h1></div>
+
+      <!-- 리뷰 제목 입력 -->
+      <div class="title-input">
+        <label for="title">리뷰 제목: </label>
+        <input type="text" id="title" placeholder="Enter the review title" />
+      </div>
+
+      <!-- 사진 업로드 섹션 -->
+      <div class="photo-upload">
+        <label for="photo">이미지 첨부: </label>
+        <input type="file" id="photo" accept="image/*" />
+      </div>
+
+      <!-- 별점 주기 섹션 -->
+      <div class="rating">
+        <label>별점: </label>
+        <span class="star" data-value="1">★</span>
+        <span class="star" data-value="2">★</span>
+        <span class="star" data-value="3">★</span>
+        <span class="star" data-value="4">★</span>
+        <span class="star" data-value="5">★</span>
+      </div>
+
+      <!-- 리뷰 작성 섹션 -->
+      <div class="review">
+        <label for="review">리뷰 내용 작성: </label>
+        <textarea id="review" placeholder="Write your review..."></textarea>
+      </div>
+
+      <!-- 저장 버튼 -->
+      <button id="save">저장하기</button>
+
+
+    <!-- 하단 네비게이션 바 -->
+    <div class="bottom-nav">
+      <a href="/"><span class="nav-item" id="home">홈</span></a>
+      <a href="/write.html"><span class="nav-item" id="add-record">회고록 작성</span></a>
+      <a href="/records.html"><span class="nav-item" id="my-records">나의 회고 기록</span></a>
+      <a href="/mypage.html"><span class="nav-item" id="my-records">마이페이지</span></a>
+    </div>
+
+    <script src="write.js"></script>
+  </body>
+</html>

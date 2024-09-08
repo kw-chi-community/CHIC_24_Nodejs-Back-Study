@@ -1,0 +1,103 @@
+/* 전역 스타일 */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4; /* 부드러운 배경색 */
+  margin: 0;
+  padding: 0;
+}
+
+/* 상단 로고 */
+.top {
+  text-align: center;
+  padding: 20px;
+  background-color: #333; /* 상단 바 배경색 */
+  color: #fff; /* 상단 바 글자색 */
+}
+
+.top h1 {
+  margin: 0;
+}
+
+/* 수정 폼 컨테이너 */
+#edit-container {
+  max-width: 600px;
+  margin: 20px auto; /* 중앙 정렬 */
+  padding: 20px;
+  background-color: #fff; /* 폼 배경색 */
+  border-radius: 8px; /* 모서리 둥글기 */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+}
+
+/* 폼 요소 */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+input[type="file"] {
+  margin-bottom: 15px;
+}
+
+button[type="submit"] {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button[type="submit"]:hover {
+  background-color: #555;
+}
+
+/* 이미지 미리보기 */
+.image-preview {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 10px 0;
+  border-radius: 4px; /* 모서리 둥글기 */
+}
+
+/* 하단 네비게이션 바 */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #333;
+  padding: 10px;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* 상단 그림자 */
+}
+
+#back-btn {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#back-btn:hover {
+  background-color: #555;
+}
