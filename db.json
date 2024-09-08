@@ -1,0 +1,11 @@
+{
+  "users": [
+    {
+      "id": "6ypyZfWQz",
+      "email": "test",
+      "password": "$2b$10$UWnPzeleBhkAPYS0aCD8wOW5wRqgggDc9GuPYFCv5j2NOE4zXJVlG",
+      "displayName": "test"
+    }
+  ],
+  "topics": []
+}
